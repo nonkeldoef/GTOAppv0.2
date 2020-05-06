@@ -1,96 +1,83 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Button, Navigator } from 'react-native';
+import { Text, View, Button, Navigator, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function HandStrengthScreen({ route, navigation }){
-    const [handGroup, sethandGroup] = useState(null);
-    const [straightFlush, setStraightFlush] = useState(null);
-    const [quads, setQuads] = useState(null);
-    const [fullHouse, setFullHouse] = useState(null);
-    const [flush, setFlush] = useState(null);
-    const [straight, setStraight] = useState(null);
-    const [threeOfaKind, setThreeOfaKind] = useState(null);
-    const [twoPair, setTwoPair] = useState(null);
-    const [overPair, setOverPair] = useState(null);
-    const [topPair, setTopPair] = useState(null);
-    const [underPair, setUnderPair] = useState(null);
-    const [secondPair, setSecondPair] = useState(null);
-    const [noGroupPair, setNoGroupPair] = useState(null);
-    const [thirdPair, setThirdPair] = useState(null);
-    const [lowPair, setLowPair] = useState(null);
-    const [nutAir, setNutAir] = useState(null);
-    const [secondNutAir, setSecondNutAir] = useState(null);
-    const [restAir, setRestAir] = useState(null);
-    
+    const [allHandStrength, setAllHandStrength] = useState(null);
+    const [handStrengthDetail, setHandStrengthDetail] = useState(null);
     const [handStrengthDetails, setHandStrengthDetails] = useState([]);
+    const [graphPath, setGraphPath] = useState(''); 
+    const [pickstufftext, setPickStuffText] = useState('');
 
-    const allHandStrengths = ['Straigth Flush','Quads','Full House','Flush','Straight','3ofaKind','2 Pair','OverPair','Top Pair','UnderPair','2nd Pair','NoGroupPP','3rd Pair','Low Pair','Nut Air','2nd Nut Air','Rest air'];
-    const fullhouseDetails = ['FH eff Nuts','FH non-eff Nuts'];
-    const flushDetails = ['NutFlush','2nd NutFlush','Rest Flush'];
-    const overpairDetails = ['OP +BDFD','OP noFD','OP +FD'];
-    const toppairDetails = ['TPs +FD','TPs +BDFD','TPo + nutBDFD','TP noFD'];
-    const underpairDetails = ['UP + BDFD','UP noFD', 'UP +FD'];
-    const secondpairDetails = ['2ndPs +FD','2ndPs +BDFD','2ndPo NutBDFD','2ndPs noFD'];
-    const nogroupppDetails = ['NGPP + BDFD','NGPP noFD', 'NGPP +FD'];
-    const thirdpairDetails = ['3rdPs +FD','3rdPs +BDFD','3rdPo NutBDFD','3rdPs noFD'];
-    const lowpairDetails = ['LP + BDFD','LP noFD', 'LP +FD'];
-    const nutairDetails = ['NAs +FD','NAs +BDFD','NAo +NutBDFD','NA Rest','NA +OESD'];
-    const secondnutairDetails = ['2ndNAs +FD','2ndNAs +BDFD','2ndNAo +NutBDFD','2ndNA Rest','2ndNA +OESD'];
-    const restairDetails = ['RAs +FD','RAs +BDFD','RAo +NutBDFD','RA Rest','RA +OESD'];
+    const allHandStrengths = ['Straigth Flush','Quads','Full House','Flush','Straight','3ofaKind','2 Pair','OverPair','Top Pair','UnderPair','2nd Pair','NoGroupPP','3rd Pair','Low Pair','Nut Air','2nd Nut Air','Rest Air'];
 
-    //receiving button input, not sure how/what/where ^_^
-  const handleButtonPress = (value, type) => {
-    switch (type) {
-      case 'handGroup':
-        setHandGroup(value);
-        break;
-    }
-  };
+    const { choices } = route.params;
 
-  useEffect(() => {
-    //if details exist, they should appear when overall handstrength is chosen
-    if (allHandStrengths === allHandStrengths[0]) setHandStrengthDetails(['Straigth Flush']);
-    else 
-    if (allHandStrengths === allHandStrengths[1]) setHandStrengthDetails(['Quads']);
-    else 
-    if (allHandStrengths === allHandStrengths[2]) setHandStrengthDetails([{fullhouseDetails}]);
-    else 
-    if (allHandStrengths === allHandStrengths[3]) setHandStrengthDetails([{flushDetails}]);
-    else 
-    if (allHandStrengths === allHandStrengths[4]) setHandStrengthDetails(['Straight']);
-    else 
-    if (allHandStrengths === allHandStrengths[5]) setHandStrengthDetails(['3ofaKind']);
-    else 
-    if (allHandStrengths === allHandStrengths[6]) setHandStrengthDetails(['2 Pair']);
-    else 
-    if (allHandStrengths === allHandStrengths[7]) setHandStrengthDetails([{overpairDetails}]);
-    else 
-    if (allHandStrengths === allHandStrengths[8]) setHandStrengthDetails([{toppairDetails}]);
-    else 
-    if (allHandStrengths === allHandStrengths[9]) setHandStrengthDetails([{underpairDetails}]);
-    else 
-    if (allHandStrengths === allHandStrengths[11]) setHandStrengthDetails([{secondpairDetails}]);
-    else 
-    if (allHandStrengths === allHandStrengths[12]) setHandStrengthDetails([{nogroupppDetails}]);
-    else 
-    if (allHandStrengths === allHandStrengths[13]) setHandStrengthDetails([{thirdpairDetails}]);
-    else 
-    if (allHandStrengths === allHandStrengths[14]) setHandStrengthDetails([{lowpairDetails}]);
-    else 
-    if (allHandStrengths === allHandStrengths[15]) setHandStrengthDetails([{nutairDetails}]);
-    else 
-    if (allHandStrengths === allHandStrengths[16]) setHandStrengthDetails([{secondnutairDetails}]);
-    else 
-    if (allHandStrengths === allHandStrengths[17]) setHandStrengthDetails([{restairDetails}]);
-    else 
-    
-    setHandStrengthDetails([]);
-  }, [handGroup]);
+    const handleButtonPress = (value, type) => {
+        switch (type) {
+          case 'allHandStrength':
+            setAllHandStrength(value);
+            break;
+
+          case 'handStrengthDetail':
+            setHandStrengthDetail(value);
+            break;
+        }
+      };
+
+      console.log(choices)
+      console.log(allHandStrength)
+      console.log(handStrengthDetail)
+      console.log(graphPath)      
+
+    useEffect(() => {
+        //if details exist, they should appear when overall handstrength is chosen. Only show straight Flush & Flush with Mono boardType choice, only show Quads & Full house with Paired boardType choice => results in max 15 choices at any time
+        if (allHandStrength === allHandStrengths[2]) setHandStrengthDetails(['FH eff Nuts','FH non-eff Nuts']);
+        else 
+        if (allHandStrength === allHandStrengths[3]) setHandStrengthDetails(['NutFlush','2nd NutFlush','Rest Flush']);
+        else
+        if (allHandStrength === allHandStrengths[7]) setHandStrengthDetails(['OP +BDFD','OP noFD','OP +FD']);
+        else 
+        if (allHandStrength === allHandStrengths[8]) setHandStrengthDetails(['TPs +FD','TPs +BDFD','TPo + nutBDFD','TP noFD']);
+        else 
+        if (allHandStrength === allHandStrengths[9]) setHandStrengthDetails(['UP + BDFD','UP noFD', 'UP +FD']);
+        else 
+        if (allHandStrength === allHandStrengths[10]) setHandStrengthDetails(['2ndPs +FD','2ndPs +BDFD','2ndPo NutBDFD','2ndPs noFD']);
+        else 
+        if (allHandStrength === allHandStrengths[11]) setHandStrengthDetails(['NGPP + BDFD','NGPP noFD', 'NGPP +FD']);
+        else 
+        if (allHandStrength === allHandStrengths[12]) setHandStrengthDetails(['3rdPs +FD','3rdPs +BDFD','3rdPo NutBDFD','3rdPs noFD']);
+        else 
+        if (allHandStrength === allHandStrengths[13]) setHandStrengthDetails(['LP + BDFD','LP noFD', 'LP +FD']);
+        else 
+        if (allHandStrength === allHandStrengths[14]) setHandStrengthDetails(['NAs +FD','NAs +BDFD','NAo +NutBDFD','NA Rest','NA +OESD']);
+        else 
+        if (allHandStrength === allHandStrengths[15]) setHandStrengthDetails(['2ndNAs +FD','2ndNAs +BDFD','2ndNAo +NutBDFD','2ndNA Rest','2ndNA +OESD']);
+        else 
+        if (allHandStrength === allHandStrengths[16]) setHandStrengthDetails(['RAs +FD','RAs +BDFD','RAo +NutBDFD','RA Rest','RA +OESD']);
+        else 
+            setHandStrengthDetails([]);
+        }, [allHandStrength]);
+
+    useEffect(() => {
+        if (
+            choices.preflopAction === 'SRP'&&
+            choices.heroPos === 'BTN'&&
+            choices.villainPos === 'BB'&&
+            choices.boardDetail === 'Mono'&&
+            choices.boardType === 'Axx'&&
+            allHandStrength === 'Rest Air'&&
+            handStrengthDetails === 'RA Rest'
+        )
+        setGraphPath("require('../graphs/SRP_BTNvsBB_Mono_Axx_Rest Air_RA Rest.png')");
+        else setPickStuffText('PICK STUFF (secretly an if else test)');
+    })
+
 
     return (
-        // First series of buttons for initial handstrength. Preferably choices from home would filter out impossible strengths automatically. (fe. Straight Flush&Flush can only exist on Mono Boards, Quads & Full house only on paired boards)
+        // First series of buttons for initial handstrength. Preferably choices from home would filter out impossible strengths automatically. (fe. Straight Flush&Flush can only exist on Mono Boards, Quads & Full house only on paired boards).
+        //Test Img with choices being SRP_BTNvsBB_Mono_Axx_Rest Air_RA Rest
         <View style={{ flex: 1, padding: 20 }}>
-            <Text>get parameters from previous page</Text>
             <Text>Pick HandStrength</Text>
             <View style={{ width: '100%', justifyContent: 'space-between', flexDirection: 'row', flexWrap: 'wrap',marginBottom: 20 }}>
                 {allHandStrengths.map(function (item, i) {
@@ -108,7 +95,7 @@ export default function HandStrengthScreen({ route, navigation }){
                                 marginVertical: 1,
                                 
                             }}
-                            onPress={() => handleButtonPress(item, 'allHandStrengths')}
+                            onPress={() => handleButtonPress(item, 'allHandStrength')}
                         >
                             <Text>{item}</Text>
                         </TouchableOpacity>
@@ -135,13 +122,24 @@ export default function HandStrengthScreen({ route, navigation }){
                             alignItems: 'center',
                             justifyContent: 'center',
                             }}
-                            onPress={() => handleButtonPress(item, 'boardDetail')}
+                            onPress={() => handleButtonPress(item, 'handStrengthDetail')}
                         >
                             <Text>{item}</Text>
                         </TouchableOpacity>
                 );
             })}
       </View>
+        <Text>situation: {choices.preflopAction}, {choices.heroPos} vs {choices.villainPos}, {choices.boardType} ({choices.boardDetail})</Text>
+        <Text>handStrength: {allHandStrength} and detail: {handStrengthDetail}</Text>
+        <Text>{pickstufftext}</Text>
+
+        <Image
+            style={{
+                resizeMode: 'contain',
+                width: 380
+            }}
+            source={graphPath}
+        />
     </View>
   );
 }

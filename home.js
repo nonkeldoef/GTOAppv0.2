@@ -15,15 +15,15 @@ export default function HomeScreen({ route, navigation }){
     const boardTypes = ['Trips', 'Paired', 'Mono', 'AT+', 'A9-', '2BW', '1BW', 'Rags'];
   
     const handleNextScreen = () => {
-      const choices = {
-        preflopAction: preflopAction,
-        heroPos: heroPos,
-        villainPos: villainPos,
-        boardType: boardType,
-        boardDetail: boardDetail,
-      };
-  
-      navigation.navigate('HandStrength', {choices: choices});
+        const choices = {
+            preflopAction: preflopAction,
+            heroPos: heroPos,
+            villainPos: villainPos,
+            boardType: boardType,
+            boardDetail: boardDetail,
+          };
+
+        navigation.navigate('HandStrength', {choices: choices});
     };
   //receiving button input
   const handleButtonPress = (value, type) => {
@@ -126,6 +126,7 @@ export default function HomeScreen({ route, navigation }){
   //stuff starts here
   return (
     <View style={{ flex: 1, padding: 20 }}>
+        <Text>{heroPos}</Text>
       <Text>Preflop Action: {preflopAction}</Text>
       <View style={{ width: '100%', justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20 }}>
         {preflopActions.map(function (item, i) {
