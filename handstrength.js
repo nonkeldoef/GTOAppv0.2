@@ -1,17 +1,41 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Button, Navigator, Image } from 'react-native';
+import { Text, View, StyleSheet, Navigator, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function HandStrengthScreen({ route, navigation }){
     const [allHandStrength, setAllHandStrength] = useState(null);
     const [handStrengthDetail, setHandStrengthDetail] = useState(null);
     const [handStrengthDetails, setHandStrengthDetails] = useState([]);
-    const [graphPath, setGraphPath] = useState(''); 
-    const [pickstufftext, setPickStuffText] = useState('');
+    const [graphPath, setGraphPath] = useState('');
 
     const allHandStrengths = ['Straigth Flush','Quads','Full House','Flush','Straight','3ofaKind','2 Pair','OverPair','Top Pair','UnderPair','2nd Pair','NoGroupPP','3rd Pair','Low Pair','Nut Air','2nd Nut Air','Rest Air'];
 
     const { choices } = route.params;
+
+    useEffect(() => {
+        if (
+            choices.preflopAction === 'SRP'&&
+            choices.heroPos === 'BTN'&&
+            choices.villainPos === 'BB'&&
+            choices.boardType === 'Mono'&&
+            choices.boardDetail === 'Axx'&&
+            allHandStrength === 'Rest Air'&&
+            handStrengthDetail === 'RA Rest'
+        )
+        setGraphPath(require('../graphs/test2.png'));
+        else
+        if (
+            choices.preflopAction === 'SRP'&&
+            choices.heroPos === 'BTN'&&
+            choices.villainPos === 'BB'&&
+            choices.boardType === 'Mono'&&
+            choices.boardDetail === 'Axx'&&
+            allHandStrength === 'Rest Air'&&
+            handStrengthDetail === 'RA +OESD'
+        )
+        setGraphPath(require('../graphs/test3.png'));
+        else setGraphPath(require('../graphs/test.png'));
+    })
 
     const handleButtonPress = (value, type) => {
         switch (type) {
@@ -23,12 +47,7 @@ export default function HandStrengthScreen({ route, navigation }){
             setHandStrengthDetail(value);
             break;
         }
-      };
-
-      console.log(choices)
-      console.log(allHandStrength)
-      console.log(handStrengthDetail)
-      console.log(graphPath)      
+      };  
 
     useEffect(() => {
         //if details exist, they should appear when overall handstrength is chosen. Only show straight Flush & Flush with Mono boardType choice, only show Quads & Full house with Paired boardType choice => results in max 15 choices at any time
@@ -59,35 +78,35 @@ export default function HandStrengthScreen({ route, navigation }){
             setHandStrengthDetails([]);
         }, [allHandStrength]);
 
-    useEffect(() => {
-        if (
-            choices.preflopAction === 'SRP'&&
-            choices.heroPos === 'BTN'&&
-            choices.villainPos === 'BB'&&
-            choices.boardDetail === 'Mono'&&
-            choices.boardType === 'Axx'&&
-            allHandStrength === 'Rest Air'&&
-            handStrengthDetails === 'RA Rest'
-        )
-        setGraphPath("require('../graphs/SRP_BTNvsBB_Mono_Axx_Rest Air_RA Rest.png')");
-        else setPickStuffText('PICK STUFF (secretly an if else test)');
-    })
-
 
     return (
         // First series of buttons for initial handstrength. Preferably choices from home would filter out impossible strengths automatically. (fe. Straight Flush&Flush can only exist on Mono Boards, Quads & Full house only on paired boards).
         //Test Img with choices being SRP_BTNvsBB_Mono_Axx_Rest Air_RA Rest
         <View style={{ flex: 1, padding: 20 }}>
-            <Text>Pick HandStrength</Text>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', alignSelf:'center' }}>{choices.preflopAction}, {choices.heroPos} vs {choices.villainPos}, {choices.boardType} ({choices.boardDetail})</Text>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', alignSelf:'center' }}>Pick Strength:</Text>
             <View style={{ width: '100%', justifyContent: 'space-between', flexDirection: 'row', flexWrap: 'wrap',marginBottom: 20 }}>
                 {allHandStrengths.map(function (item, i) {
+
+                    let backgroundColor
+                    if (item === allHandStrength)
+                    backgroundColor ='#0065b7',
+                    borderColor = 'white'
+                    else 
+                    backgroundColor = '#e0e0e0',
+                    borderColor = '#6d6d6d'
+                    ;
+
                     return (
                         <TouchableOpacity
                             key={i}
                             style={{
-                                width: 50,
+                                borderRadius: 10,
+                                borderWidth: 1,
+                                backgroundColor: backgroundColor,
+                                borderColor: borderColor,
+                                width: 75,
                                 height: 40,
-                                backgroundColor: 'gray',
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 padding: 2,
@@ -97,49 +116,64 @@ export default function HandStrengthScreen({ route, navigation }){
                             }}
                             onPress={() => handleButtonPress(item, 'allHandStrength')}
                         >
-                            <Text>{item}</Text>
+                            <Text style={{fontWeight: 'bold', alignSelf:'center'}}>{item}</Text>
                         </TouchableOpacity>
                     );
                 })}
             </View>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', alignSelf:'center' }}>Pick Strength Detail:</Text>
             <View
                 style={{
                 width: '100%',
                 justifyContent: 'space-between',
                 flexDirection: 'row',
-                marginBottom: 20,
                 flexWrap: 'wrap',
                 }}
             >
                 {handStrengthDetails.map(function (item, i) {
+
+                    let backgroundColor
+                    if (item === handStrengthDetail)
+                    backgroundColor ='#0065b7',
+                    borderColor = 'white'
+                    else 
+                    backgroundColor = '#e0e0e0',
+                    borderColor = '#6d6d6d'
+                    ;
+
                     return (
                         <TouchableOpacity
                             key={i}
                             style={{
-                            width: 60,
+                            borderRadius: 10,
+                            backgroundColor: backgroundColor,
+                            borderColor: borderColor,
+                            borderWidth: 1,
+                            width: 75,
                             height: 50,
-                            backgroundColor: 'gray',
-                            alignItems: 'center',
                             justifyContent: 'center',
+                            padding: 4,
+                            marginHorizontal: 1,
+                            marginVertical: 1,
                             }}
                             onPress={() => handleButtonPress(item, 'handStrengthDetail')}
                         >
-                            <Text>{item}</Text>
+                            <Text style={{fontWeight: 'bold', alignSelf:'center'}}>{item}</Text>
                         </TouchableOpacity>
-                );
-            })}
-      </View>
-        <Text>situation: {choices.preflopAction}, {choices.heroPos} vs {choices.villainPos}, {choices.boardType} ({choices.boardDetail})</Text>
-        <Text>handStrength: {allHandStrength} and detail: {handStrengthDetail}</Text>
-        <Text>{pickstufftext}</Text>
-
-        <Image
-            style={{
-                resizeMode: 'contain',
-                width: 380
-            }}
-            source={graphPath}
-        />
+                    );
+                 })}
+            </View>
+        <View>
+             <Image
+             style={{
+                resizeMode: "contain",
+                width: 400,
+                alignSelf: 'center'
+                }}
+             
+             source={graphPath} />
+        </View>
+        
     </View>
   );
 }
