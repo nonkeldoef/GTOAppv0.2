@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, Navigator } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { color } from 'react-native-reanimated';
 
 export default function HomeScreen({ route, navigation }){
     const [preflopAction, setPreflopAction] = useState(null);
@@ -126,17 +127,19 @@ export default function HomeScreen({ route, navigation }){
   //stuff starts here
   return (
     <View style={{ flex: 1, padding: 20 }}>
-      <Text style={styles.titleText}>Preflop Action:</Text>
+      <Text style={{fontSize: 16, fontWeight: 'bold', alignSelf:'center'}}>Preflop Action:</Text>
       <View style={{ width: '100%', justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20, }}>
         {preflopActions.map(function (item, i) {
 
           let backgroundColor
           if (item === preflopAction)
           backgroundColor ='#0065b7',
-          borderColor = 'white'
+          borderColor = 'white',
+          textColor = 'white'
           else 
           backgroundColor = '#e0e0e0',
-          borderColor = '#6d6d6d'
+          borderColor = '#6d6d6d',
+          textColor = 'black'
           ;
 
           return (
@@ -155,13 +158,13 @@ export default function HomeScreen({ route, navigation }){
               }}
               onPress={() => handleButtonPress(item, 'preflopAction')}
             >
-              <Text style={{fontWeight: 'bold', alignSelf:'center'}}>{item}</Text>
+              <Text style={{fontWeight: 'bold', alignSelf:'center', color: textColor}}>{item}</Text>
             </TouchableOpacity>
           );
         })}
       </View>
 
-      <Text style={styles.titleText}>Hero Pos:</Text>
+      <Text style={{fontSize: 16, fontWeight: 'bold', alignSelf:'center'}}>Hero Pos:</Text>
       <View
         style={{
           width: '100%',
@@ -176,10 +179,12 @@ export default function HomeScreen({ route, navigation }){
           let backgroundColor
           if (item === heroPos)
           backgroundColor ='#0065b7',
-          borderColor = 'white'
+          borderColor = 'white',
+          textColor = 'white'
           else 
           backgroundColor = '#e0e0e0',
-          borderColor = '#6d6d6d'
+          borderColor = '#6d6d6d',
+          textColor = 'black'
           ;
 
           return (
@@ -198,23 +203,25 @@ export default function HomeScreen({ route, navigation }){
               }}
               onPress={() => handleButtonPress(item, 'heroPos')}
             >
-              <Text style={{fontWeight: 'bold', alignSelf:'center'}}>{item}</Text>
+              <Text style={{fontWeight: 'bold', alignSelf:'center', color: textColor}}>{item}</Text>
             </TouchableOpacity>
           );
         })}
       </View>
 
-      <Text style={styles.titleText}>Villain Pos:</Text>
+      <Text style={{fontSize: 16, fontWeight: 'bold', alignSelf:'center'}}>Villain Pos:</Text>
       <View style={{width: '100%', justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20, flexWrap: 'wrap'}}>
         {villainPositions.map(function (item, i) {
 
           let backgroundColor
           if (item === villainPos)
           backgroundColor ='#0065b7',
-          borderColor = 'white'
+          borderColor = 'white',
+          textColor = 'white'
           else 
           backgroundColor = '#e0e0e0',
-          borderColor = '#6d6d6d'
+          borderColor = '#6d6d6d',
+          textColor = 'black'
           ;
 
           return (
@@ -233,23 +240,25 @@ export default function HomeScreen({ route, navigation }){
               }}
               onPress={() => handleButtonPress(item, 'villainPos')}
             >
-              <Text style={{fontWeight: 'bold', alignSelf:'center'}}>{item}</Text>
+              <Text style={{fontWeight: 'bold', alignSelf:'center', color: textColor}}>{item}</Text>
             </TouchableOpacity>
           );
         })}
       </View>
 
-      <Text style={styles.titleText}>BoardType:</Text>
+      <Text style={{fontSize: 16, fontWeight: 'bold', alignSelf:'center'}}>BoardType:</Text>
       <View style={{width: '100%', justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20, flexWrap: 'wrap'}}>
         {boardTypes.map(function (item, i) {
 
           let backgroundColor
           if (item === boardType)
           backgroundColor ='#0065b7',
-          borderColor = 'white'
+          borderColor = 'white',
+          textColor = 'white'
           else 
           backgroundColor = '#e0e0e0',
-          borderColor = '#6d6d6d'
+          borderColor = '#6d6d6d',
+          textColor = 'black'
           ;
 
           return (
@@ -268,22 +277,13 @@ export default function HomeScreen({ route, navigation }){
               }}
               onPress={() => handleButtonPress(item, 'boardType')}
             >
-              <Text style={{fontWeight: 'bold', alignSelf:'center'}}>
-                {item}
-              </Text>
+              <Text style={{fontWeight: 'bold', alignSelf:'center', color: textColor}}>{item}</Text>
             </TouchableOpacity>
           );
         })}
       </View>
 
-      <Text
-       style={{
-        fontSize: 18,
-        fontWeight: 'bold',
-        alignSelf:'center',
-         }}>
-      BoardDetail: {boardDetail}
-      </Text>
+      <Text style={{fontSize: 16, fontWeight: 'bold', alignSelf:'center'}}>BoardDetail: {boardDetail}</Text>
       <View
         style={{
           width: '100%',
@@ -296,13 +296,15 @@ export default function HomeScreen({ route, navigation }){
         {boardDetails.map(function (item, i ) {
 
           let backgroundColor
-            if (item === boardDetail)
-            backgroundColor ='#0065b7',
-            borderColor = 'white'
-            else 
-            backgroundColor = '#e0e0e0',
-            borderColor = '#6d6d6d'
-            ;
+          if (item === boardDetail)
+          backgroundColor ='#0065b7',
+          borderColor = 'white',
+          textColor = 'white'
+          else 
+          backgroundColor = '#e0e0e0',
+          borderColor = '#6d6d6d',
+          textColor = 'black'
+          ;
           
 
           return (
@@ -321,7 +323,7 @@ export default function HomeScreen({ route, navigation }){
               }}
               onPress={() => handleButtonPress(item, 'boardDetail')}
             >
-              <Text style={{fontWeight: 'bold', alignSelf:'center'}}>{item}</Text>
+              <Text style={{fontWeight: 'bold', alignSelf:'center', color: textColor}}>{item}</Text>
             </TouchableOpacity>
           );
         })}
@@ -336,34 +338,3 @@ export default function HomeScreen({ route, navigation }){
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-    titleText: {
-      fontSize: 16,
-      fontWeight: 'bold',
-      alignSelf:'center'
-    },
-    button: {
-      borderRadius: 10,
-      width: 60,
-      height: 50,
-      borderWidth: 1,
-      borderColor: 'black',
-      backgroundColor: 'red',
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginBottom: 2,
-    },
-    buttonSelected: {
-      borderRadius: 10,
-      width: 60,
-      height: 50,
-      borderWidth: 2,
-      borderColor: 'yellow',
-      backgroundColor: 'blue',
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginBottom: 2,
-    }
-
-});

@@ -91,10 +91,12 @@ export default function HandStrengthScreen({ route, navigation }){
                     let backgroundColor
                     if (item === allHandStrength)
                     backgroundColor ='#0065b7',
-                    borderColor = 'white'
+                    borderColor = 'white',
+                    textColor = 'white'
                     else 
                     backgroundColor = '#e0e0e0',
-                    borderColor = '#6d6d6d'
+                    borderColor = '#6d6d6d',
+                    textColor = 'black'
                     ;
 
                     return (
@@ -116,7 +118,7 @@ export default function HandStrengthScreen({ route, navigation }){
                             }}
                             onPress={() => handleButtonPress(item, 'allHandStrength')}
                         >
-                            <Text style={{fontWeight: 'bold', alignSelf:'center'}}>{item}</Text>
+                            <Text style={{fontWeight: 'bold', alignSelf:'center', color: textColor}}>{item}</Text>
                         </TouchableOpacity>
                     );
                 })}
@@ -135,10 +137,12 @@ export default function HandStrengthScreen({ route, navigation }){
                     let backgroundColor
                     if (item === handStrengthDetail)
                     backgroundColor ='#0065b7',
-                    borderColor = 'white'
+                    borderColor = 'white',
+                    textColor = 'white'
                     else 
                     backgroundColor = '#e0e0e0',
-                    borderColor = '#6d6d6d'
+                    borderColor = '#6d6d6d',
+                    textColor = 'black'
                     ;
 
                     return (
@@ -158,7 +162,7 @@ export default function HandStrengthScreen({ route, navigation }){
                             }}
                             onPress={() => handleButtonPress(item, 'handStrengthDetail')}
                         >
-                            <Text style={{fontWeight: 'bold', alignSelf:'center'}}>{item}</Text>
+                            <Text style={{fontWeight: 'bold', alignSelf:'center', color: textColor}}>{item}</Text>
                         </TouchableOpacity>
                     );
                  })}
