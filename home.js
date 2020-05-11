@@ -13,7 +13,7 @@ export default function HomeScreen({ route, navigation }){
     const preflopActions = ['SRP', '3BP', '4BP'];
     const heroPositions = ['UTG', 'MP', 'CO', 'BTN', 'SB', 'BB'];
     const villainPositions = ['UTG', 'MP', 'CO', 'BTN', 'SB', 'BB'];
-    const boardTypes = ['Trips', 'Paired', 'Mono', 'AT+', 'A9-', '2BW', '1BW', 'Rags'];
+    const boardTypes = ['Trips', 'Paired', 'Mono', 'ATp', 'A9m', '2BW', '1BW', 'Rags'];
   
     const handleNextScreen = () => {
         const choices = {
@@ -24,10 +24,10 @@ export default function HomeScreen({ route, navigation }){
             boardDetail: boardDetail,
           };
 
-        navigation.navigate('HandStrength', {choices: choices});
+        navigation.navigate('HandStrength', {choices: choices, name: preflopAction+' '+heroPos+'vs'+villainPos+' '+boardType+' ('+boardDetail+')'});
     };
   //receiving button input
-  const handleButtonPress = (value, type) => {
+  const handleButtonPress = (value, type, name) => {
     switch (type) {
       case 'preflopAction':
         setPreflopAction(value);
@@ -55,74 +55,227 @@ export default function HomeScreen({ route, navigation }){
   };
 
   useEffect(() => {
+    //SRP_MPvsBTN
+    //SRP_MPvsBB
+    //SRP_COvsBTN
+    //SRP_COvsBB
     //SRP_BTNvsBB
+    //SRP_SBvsBB
+    //3BP_COvsMP
+    //3BP_BTNvsMP
+    //3BP_SBvsMP
+    //3BP_BBvsMP
+    //3BP_BTNvsCO
+    //3BP_SBvsCO
     if (
-      preflopAction === preflopActions[0] &&
-      heroPos === heroPositions[3] &&
-      villainPos === villainPositions[5] &&
+      preflopAction === preflopActions[1] &&
+      heroPos === heroPositions[4] &&
+      villainPos === villainPositions[2] &&
       boardType === boardTypes[0]
     )
-      setBoardDetails(['Trips']);
+      setBoardDetails(['222-KKK','AAA']);
     else 
     if (
-      preflopAction === preflopActions[0] &&
-      heroPos === heroPositions[3] &&
-      villainPos === villainPositions[5] &&
+      preflopAction === preflopActions[1] &&
+      heroPos === heroPositions[4] &&
+      villainPos === villainPositions[2] &&
       boardType === boardTypes[1]
     )
-      setBoardDetails(['AAx','2BW (JJ+)','Paired AJJ+/TTx&99x','A88-','Rags+1BW(-BW99)']);
+      setBoardDetails(['22A-TTA','22x-TTx-NoJ-FD','Paired-Rest']);
     else 
     if (
-      preflopAction === preflopActions[0] &&
-      heroPos === heroPositions[3] &&
-      villainPos === villainPositions[5] &&
+      preflopAction === preflopActions[1] &&
+      heroPos === heroPositions[4] &&
+      villainPos === villainPositions[2] &&
       boardType === boardTypes[2]
     )
-      setBoardDetails(['Axx','Kxx','Mono Rest']);
+      setBoardDetails(['ATp','A9m','Mono-Rest']);
     else 
     if (
-      preflopAction === preflopActions[0] &&
-      heroPos === heroPositions[3] &&
-      villainPos === villainPositions[5] &&
+      preflopAction === preflopActions[1] &&
+      heroPos === heroPositions[4] &&
+      villainPos === villainPositions[2] &&
       boardType === boardTypes[3]
     )
-      setBoardDetails(['AHH','AT+(-AHH)']);
+      setBoardDetails(['ATp-FD','ATp-R']);
     else 
     if (
-      preflopAction === preflopActions[0] &&
-      heroPos === heroPositions[3] &&
-      villainPos === villainPositions[5] &&
+      preflopAction === preflopActions[1] &&
+      heroPos === heroPositions[4] &&
+      villainPos === villainPositions[2] &&
       boardType === boardTypes[4]
     )
-      setBoardDetails(['A8-A9','A7-']);
+      setBoardDetails(['A9m-FD','A9m-R']);
     else 
     if (
-      preflopAction === preflopActions[0] &&
-      heroPos === heroPositions[3] &&
-      villainPos === villainPositions[5] &&
+      preflopAction === preflopActions[1] &&
+      heroPos === heroPositions[4] &&
+      villainPos === villainPositions[2] &&
       boardType === boardTypes[5]
     )
-      setBoardDetails(['3BW','2BW FD','2BW R']);
+      setBoardDetails(['2BW-FD','2BW-R']);
     else 
     if (
-      preflopAction === preflopActions[0] &&
-      heroPos === heroPositions[3] &&
-      villainPos === villainPositions[5] &&
+      preflopAction === preflopActions[1] &&
+      heroPos === heroPositions[4] &&
+      villainPos === villainPositions[2] &&
       boardType === boardTypes[6]
     )
-      setBoardDetails(['KLL','TLL-QLL','HMM Tx','HMM Jx','HML Tx','HML J+R','HML J7x FD','HML 1BW9-8x FD','HML 1BW7-6x FD']);
+      setBoardDetails(['Kxx-FD','Kxx-R','Qxx-Jxx-FD','Qxx-Jxx-R','Txx-FD','Txx-R']);
     else 
     if (
-      preflopAction === preflopActions[0] &&
-      heroPos === heroPositions[3] &&
-      villainPos === villainPositions[5] &&
+      preflopAction === preflopActions[1] &&
+      heroPos === heroPositions[4] &&
+      villainPos === villainPositions[2] &&
       boardType === boardTypes[7]
     )
-      setBoardDetails(['5LL', '6LL','MMM','MXL wS','MXL noS']);
+      setBoardDetails(['987-543','Rags-Rest']);
+    else 
+    //3BP_BBvsCO
+    //3BP_SBvsBTN
+    if (
+      preflopAction === preflopActions[1] &&
+      heroPos === heroPositions[4] &&
+      villainPos === villainPositions[3] &&
+      boardType === boardTypes[0]
+    )
+      setBoardDetails(['222-TTT','JJJ-QQQ','KKK-AAA']);
+    else 
+    if (
+      preflopAction === preflopActions[1] &&
+      heroPos === heroPositions[4] &&
+      villainPos === villainPositions[3] &&
+      boardType === boardTypes[1]
+    )
+      setBoardDetails(['AA2-AAQ','AAK-AKK','A22-A88-FD','A99-AQQ-FD','22x-88x-FD-NoA','99x-FD-NoA', 'Any-9xp-R','Any-8xm-R']);
+    else 
+    if (
+      preflopAction === preflopActions[1] &&
+      heroPos === heroPositions[4] &&
+      villainPos === villainPositions[3] &&
+      boardType === boardTypes[2]
+    )
+      setBoardDetails(['AHM-AMM','Ax-Rest','nonAx-Rest']);
+    else 
+    if (
+      preflopAction === preflopActions[1] &&
+      heroPos === heroPositions[4] &&
+      villainPos === villainPositions[3] &&
+      boardType === boardTypes[3]
+    )
+      setBoardDetails(['AHH','AHM FD','AHL-FD', 'AHM-AHL-R']);
+    else 
+    if (
+      preflopAction === preflopActions[1] &&
+      heroPos === heroPositions[4] &&
+      villainPos === villainPositions[3] &&
+      boardType === boardTypes[4]
+    )
+      setBoardDetails(['AMM-AML-FD','ALL-FD','AMM-AML-R','ALL-R']);
+    else 
+    if (
+      preflopAction === preflopActions[1] &&
+      heroPos === heroPositions[4] &&
+      villainPos === villainPositions[3] &&
+      boardType === boardTypes[5]
+    )
+      setBoardDetails(['2BW-FD','2BW-R','3BW-FD']);
+    else 
+    if (
+      preflopAction === preflopActions[1] &&
+      heroPos === heroPositions[4] &&
+      villainPos === villainPositions[3] &&
+      boardType === boardTypes[6]
+    )
+      setBoardDetails(['1BW-FD','1BW-R']);
+    else 
+    if (
+      preflopAction === preflopActions[1] &&
+      heroPos === heroPositions[4] &&
+      villainPos === villainPositions[3] &&
+      boardType === boardTypes[7]
+    )
+      setBoardDetails(['Rags-noS-FD','Rags-noS-R','Rags-wS']);
     else 
 
     setBoardDetails([]);
   }, [preflopAction, heroPos, villainPos, boardType]);
+  //3BP_BBvsBTN
+  if (
+    preflopAction === preflopActions[1] &&
+    heroPos === heroPositions[5] &&
+    villainPos === villainPositions[3] &&
+    boardType === boardTypes[0]
+  )
+    setBoardDetails(['222-TTT','JJJ-QQQ','KKK','AAA']);
+  else 
+  if (
+    preflopAction === preflopActions[1] &&
+    heroPos === heroPositions[5] &&
+    villainPos === villainPositions[3] &&
+    boardType === boardTypes[1]
+  )
+    setBoardDetails(['AAx','Axx','KKx','Kxx','JJx-QQx-FD','JJx-QXx-R','Jxx-Qxx-FD','Jxx-Qxx-R','22T-TT9','22x-99x-FD','22x-99x-R']);
+  else 
+  if (
+    preflopAction === preflopActions[1] &&
+    heroPos === heroPositions[5] &&
+    villainPos === villainPositions[3] &&
+    boardType === boardTypes[2]
+  )
+    setBoardDetails(['AKx','ATp-noAKx','A9m','2BW','1BW','Rags']);
+  else 
+  if (
+    preflopAction === preflopActions[1] &&
+    heroPos === heroPositions[5] &&
+    villainPos === villainPositions[3] &&
+    boardType === boardTypes[3]
+  )
+    setBoardDetails(['AKx-R','AHH','ATp-FD','ATp-R']);
+  else 
+  if (
+    preflopAction === preflopActions[1] &&
+    heroPos === heroPositions[5] &&
+    villainPos === villainPositions[3] &&
+    boardType === boardTypes[4]
+  )
+    setBoardDetails(['A9m-FD','A9m-R']);
+  else 
+  if (
+    preflopAction === preflopActions[1] &&
+    heroPos === heroPositions[5] &&
+    villainPos === villainPositions[3] &&
+    boardType === boardTypes[5]
+  )
+    setBoardDetails(['KHH-Q9x-wS','Kxx-FD','Kxx-R','Qxx-FD','Qxx-R','JTx-FD','JTx-R']);
+  else 
+  if (
+    preflopAction === preflopActions[1] &&
+    heroPos === heroPositions[5] &&
+    villainPos === villainPositions[3] &&
+    boardType === boardTypes[6]
+  )
+    setBoardDetails(['Kxx-FD','Kxx-R','Qxx-FD','Qxx-R','Jxx-FD','Jxx-R']);
+  else 
+  if (
+    preflopAction === preflopActions[1] &&
+    heroPos === heroPositions[5] &&
+    villainPos === villainPositions[3] &&
+    boardType === boardTypes[7]
+  )
+    setBoardDetails(['Rags-FD','Rags-R']);
+  else 
+  //3BP_BBvsSB
+  //4BP_MPvsCO
+  //4BP_MPvsBTN
+  //4BP_MPvsSB
+  //4BP_MPvsBB
+  //4BP_COvsBTN
+  //4BP_COvsSB
+  //4BP_COvsBB
+  //4BP_BTNvsSB
+  //4BP_BTNvsBB
+  //4BP_SBvsBB
 
   //stuff starts here
   return (
@@ -312,7 +465,7 @@ export default function HomeScreen({ route, navigation }){
               key={i}
               style={{
                 borderRadius: 10,
-                width: 60,
+                width: 90,
                 height: 50,
                 borderWidth: 1,
                 backgroundColor : backgroundColor,
@@ -323,7 +476,7 @@ export default function HomeScreen({ route, navigation }){
               }}
               onPress={() => handleButtonPress(item, 'boardDetail')}
             >
-              <Text style={{fontWeight: 'bold', alignSelf:'center', color: textColor}}>{item}</Text>
+              <Text style={{fontWeight: 'bold', alignSelf:'center', color: textColor, fontSize: 12}}>{item}</Text>
             </TouchableOpacity>
           );
         })}
